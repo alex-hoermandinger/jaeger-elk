@@ -23,7 +23,7 @@ services:
       - ~/elasticsearch/logs:/usr/share/elasticsearch/logs
       - ./docker-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.2.4
+    image: kibana-logtrail:latest
     ports:
       - "5601:5601"
     environment:
@@ -32,6 +32,8 @@ services:
     - els
     networks:
     - web
+    volumes:
+      - ./logtrail.json:/usr/share/kibana/plugins/logtrail/logtrail.json
   logstash:
     image: docker.elastic.co/logstash/logstash:6.2.4
     ports:
